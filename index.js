@@ -31,7 +31,7 @@ function select() {
 				break;
 			case (CHOICE_FINISH):
 				fs.writeFileSync(DEPLOY_DIR + DEPLOY_NAME, toHtml(team));
-				console.log(DEPLOY_DIR + DEPLOY_NAME + " created.");
+				console.log("\t" + DEPLOY_DIR + DEPLOY_NAME + " created.");
 				break;
 		}
 	});
