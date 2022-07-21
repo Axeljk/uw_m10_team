@@ -1,33 +1,52 @@
 // Modules required.
 const fs = require("fs");
 const inquirer = require("inquirer");
-const toHtml = require("./utils/generateHtml.js");
+const Manager = require("./lib/Manager.js");
+const Engineer = require("./lib/Engineer.js");
+const Intern = require("./lib/Intern.js");
+const toHtml = require("./util/generateHtml.js");
 
 // Constants.
 const DEPLOY_DIR = "./dist/";
+const DEPLOY_NAME = "index.html";
+const CHOICE_ENGINEER = "Add Engineer";
+const CHOICE_INTERN = "Add Intern";
+const CHOICE_FINISH = "Complete Team and Deploy";
 
-// Questions.
-const questions = [
-	{
-		type: "input",
-		message: "What is the size of your team?",
-		name: "teamSize",
-	}
-];
+// Global variables.
+const team = [];
 
-// Creates the team from answers given.
-createTeam(answers) {
-	return { }
+function select() {
+	inquirer.prompt([{
+		type: "list",
+		choices: [CHOICE_ENGINEER, CHOICE_INTERN, CHOICE_FINISH],
+		name: "selection"
+	}]).then(ans => {
+		switch(ans.selection) {
+			case (CHOICE_ENGINEER):
+				addEmployee(Engineer);
+				break;
+			case (CHOICE_INTERN):
+				addEmployee(Intern);
+				break;
+			case (CHOICE_FINISH):
+				fs.writeFileSync(DEPLOY_DIR + DEPLOY_NAME, toHtml(team));
+				console.log(DEPLOY_DIR + DEPLOY_NAME + " created.");
+				break;
+		}
+	});
 }
 
-// Called when program starts.
-function init() {
+// Takes a class as an argument and calls its questions().
+// "...Object.values(answers)" spreads the answers into an array and passes all of them to the class's constructor.
+function addEmployee(person) {
 	inquirer
-	.prompt(questions)
-	.then(answers => createTeam(answers))
-	.then((team) => toHtml(team))
-	.catch((err) => console.error(err));
+	.prompt(person.questions())
+	.then(answers => {
+		team.push(new person(...Object.values(answers)));
+		select();
+	})
 }
 
 // Function call to initialize app.
-init();
+addEmployee(Manager);
