@@ -1,4 +1,4 @@
-# readme-generator
+# HTML Team Generator
 
 [![badge](https://img.shields.io/github/license/Axeljk/uw_m10_team)](https://github.com/Axeljk/uw_m10_team/blob/main/LICENSE)
 
