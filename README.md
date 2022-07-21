@@ -37,7 +37,7 @@ To use, run the following command:
 node index.js
 ```
 
-[A video demonstrating the features of the app]()
+[A video demonstrating the features of the app](https://watch.screencastify.com/v/5Mdg175gOOw8CVxorBHO)
 
 Beginning with the manager, enter your team's names, IDs, emails, and other info as prompted. An HTML file will be generated in ./dist/ upon completion. Any size team of a manager, engineers, and interns is supported.
 
