@@ -31,6 +31,9 @@ npm i
 - Jest
 
 ## Usage
+
+![screenshot](./assets/img/screetshot.jpg)
+
 To use, run the following command:
 
 ```bash
